@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Computer Science Student</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #667eea;
+            margin: 0 auto 20px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .contact-links a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #f8f9ff, #e8ecff);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.15);
+        }
+
+        .skill-category h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            color: #555;
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .skills-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 10px;
+        }
+
+        .project {
+            background: linear-gradient(135deg, #fff, #f8f9ff);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .project:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .project h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .project-tech {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-right: 8px;
+            margin-bottom: 10px;
+        }
+
+        .project-links {
+            margin-top: 15px;
+        }
+
+        .project-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .project-links a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .education-item {
+            border-left: 3px solid #667eea;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 13px;
+            height: 13px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+
+        .education-item h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .education-item .date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape1 {
+            top: 20%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            background: #667eea;
+            border-radius: 50%;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            top: 60%;
+            right: 10%;
+            width: 60px;
+            height: 60px;
+            background: #764ba2;
+            transform: rotate(45deg);
+            animation-delay: 2s;
+        }
+
+        .shape3 {
+            bottom: 20%;
+            left: 20%;
+            width: 100px;
+            height: 100px;
+            background: #667eea;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            header, .section { padding: 20px; }
+            h1 { font-size: 2em; }
+            .contact-links { flex-direction: column; align-items: center; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="profile-img">👨‍💻</div>
+            <h1>Your Full Name</h1>
+            <p class="subtitle">Computer Science Major | Future Data Science Master's Student</p>
+            <div class="contact-links">
+                <a href="mailto:your.email@example.com">📧 Email</a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank">💼 LinkedIn</a>
+                <a href="https://github.com/yourusername" target="_blank">💻 GitHub</a>
+                <a href="path/to/your/resume.pdf" target="_blank">📄 Resume</a>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2>About Me</h2>
+            <p>Hello! I'm a passionate computer science student currently pursuing my bachelor's degree, with plans to continue into a Master's program in Data Science. I love solving complex problems through code and turning data into meaningful insights. I'm constantly learning new technologies and working on projects that challenge me to grow as a developer.</p>
+            <br>
+            <p>When I'm not coding, you can find me exploring the latest tech trends, contributing to open-source projects, or working on personal projects that combine my interests in software development and data analysis.</p>
+        </section>
+
+        <section class="section">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul class="skills-list">
+                        <li>Python</li>
+                        <li>Java</li>
+                        <li>JavaScript</li>
+                        <li>C++</li>
+                        <li>SQL</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Web Technologies</h3>
+                    <ul class="skills-list">
+                        <li>HTML5 & CSS3</li>
+                        <li>React.js</li>
+                        <li>Node.js</li>
+                        <li>Express.js</li>
+                        <li>MongoDB</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Data Science</h3>
+                    <ul class="skills-list">
+                        <li>Pandas & NumPy</li>
+                        <li>Machine Learning</li>
+                        <li>Data Visualization</li>
+                        <li>Statistical Analysis</li>
+                        <li>Jupyter Notebooks</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <ul class="skills-list">
+                        <li>Git & GitHub</li>
+                        <li>VS Code</li>
+                        <li>Docker</li>
+                        <li>AWS</li>
+                        <li>Linux</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Featured Projects</h2>
+            
+            <div class="project">
+                <h3>Data Analysis Dashboard</h3>
+                <p>Built an interactive web dashboard to visualize and analyze large datasets. Implemented real-time data processing and created intuitive charts and graphs for better data interpretation.</p>
+                <div>
+                    <span class="project-tech">Python</span>
+                    <span class="project-tech">Flask</span>
+                    <span class="project-tech">D3.js</span>
+                    <span class="project-tech">PostgreSQL</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/yourusername/project1" target="_blank">🔗 GitHub</a>
+                    <a href="https://your-demo-link.com" target="_blank">🚀 Live Demo</a>
+                </div>
+            </div>
+
+            <div class="project">
+                <h3>Machine Learning Classifier</h3>
+                <p>Developed a machine learning model to classify and predict outcomes based on historical data. Achieved 94% accuracy using ensemble methods and feature engineering techniques.</p>
+                <div>
+                    <span class="project-tech">Python</span>
+                    <span class="project-tech">Scikit-learn</span>
+                    <span class="project-tech">Pandas</span>
+                    <span class="project-tech">Matplotlib</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/yourusername/project2" target="_blank">🔗 GitHub</a>
+                    <a href="path/to/project-report.pdf" target="_blank">📊 Report</a>
+                </div>
+            </div>
+
+            <div class="project">
+                <h3>Full-Stack Web Application</h3>
+                <p>Created a complete web application with user authentication, CRUD operations, and responsive design. Implemented RESTful API architecture and modern frontend practices.</p>
+                <div>
+                    <span class="project-tech">React</span>
+                    <span class="project-tech">Node.js</span>
+                    <span class="project-tech">MongoDB</span>
+                    <span class="project-tech">JWT</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/yourusername/project3" target="_blank">🔗 GitHub</a>
+                    <a href="https://your-app.herokuapp.com" target="_blank">🌐 Live Site</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Bachelor of Science in Computer Science</h3>
+                <div class="date">Expected Graduation: May 2026</div>
+                <p>Your University Name • GPA: X.XX/4.0</p>
+                <p><strong>Relevant Coursework:</strong> Data Structures & Algorithms, Database Systems, Software Engineering, Machine Learning, Web Development, Statistical Methods</p>
+            </div>
+            
+            <div class="education-item">
+                <h3>Master of Science in Data Science</h3>
+                <div class="date">Starting Fall 2026</div>
+                <p>Your Target University • Focus: Machine Learning and Big Data Analytics</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Experience & Activities</h2>
+            <div class="education-item">
+                <h3>Computer Science Teaching Assistant</h3>
+                <div class="date">August 2024 - Present</div>
+                <p>Assist students with programming assignments, hold office hours, and help grade exams for introductory computer science courses.</p>
+            </div>
+            
+            <div class="education-item">
+                <h3>Hackathon Participant</h3>
+                <div class="date">Various Dates</div>
+                <p>Participated in multiple hackathons, developing innovative solutions under time constraints and collaborating with diverse teams.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Current Focus</h2>
+            <p>🎯 <strong>Learning:</strong> Advanced machine learning algorithms, cloud computing with AWS, and modern JavaScript frameworks</p>
+            <br>
+            <p>🔬 <strong>Working On:</strong> A capstone project involving predictive analytics for real-world applications</p>
+            <br>
+            <p>🚀 <strong>Goals:</strong> Secure an internship in data science, contribute more to open-source projects, and build a strong foundation for graduate studies</p>
+        </section>
+    </div>
+
+    <script>
+        // Add smooth scrolling and some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth reveal animation for sections
+            const sections = document.querySelectorAll('.section, header');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+
+            // Add typing effect to the subtitle
+            const subtitle = document.querySelector('.subtitle');
+            const text = subtitle.textContent;
+            subtitle.textContent = '';
+            let i = 0;
+            const typeWriter = () => {
+                if (i < text.length) {
+                    subtitle.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            };
+            setTimeout(typeWriter, 1000);
+        });
+    </script>
+</body>
+</html>
